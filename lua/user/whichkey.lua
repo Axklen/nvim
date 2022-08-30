@@ -109,26 +109,18 @@ local m_mappings = {
 }
 
 local mappings = {
-  ["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Action" },
-  -- b = { "<cmd>lua require('user.bfs').open()<cr>", "Buffers" },
-  b = {
-    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal'})<cr>",
-    "Find files",
-  },
-  -- b = { "<cmd>JABSOpen<cr>", "Buffers" },
-  -- ["b"] = {
-  --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-  --   "Buffers",
-  -- },
-  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["v"] = { "<cmd>vsplit<cr>", "vsplit" },
-  ["h"] = { "<cmd>split<cr>", "split" },
-  ["w"] = { "<cmd>w<CR>", "Write" },
-  -- ["h"] = { "<cmd>nohlsearch<CR>", "No HL" },
-  ["q"] = { '<cmd>lua require("user.functions").smart_quit()<CR>', "Quit" },
-  ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
+  -- ["1"] = "which_key_ignore",
+  a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Action" },
+  b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+  e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  v = { "<cmd>vsplit<cr>", "vsplit" },
+  h = { "<cmd>split<cr>", "split" },
+  w = { "<cmd>w<CR>", "Write" },
+  -- h = { "<cmd>nohlsearch<CR>", "No HL" },
+  q = { '<cmd>lua require("user.functions").smart_quit()<CR>', "Quit" },
+  ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" },
   -- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+  c = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 
   -- :lua require'lir.float'.toggle()
   -- ["f"] = {
@@ -136,9 +128,9 @@ local mappings = {
   --   "Find files",
   -- },
   -- ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-  ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  -- P = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
   -- ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
-  ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
+  -- ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
   ["gy"] = "Link",
 
   B = {
@@ -161,11 +153,14 @@ local mappings = {
 
   o = {
     name = "Options",
+    c = { '<cmd>lua vim.g.cmp_active=false<cr>', "Completion off" },
+    C = { '<cmd>lua vim.g.cmp_active=true<cr>', "Completion on" },
     w = { '<cmd>lua require("user.functions").toggle_option("wrap")<cr>', "Wrap" },
     r = { '<cmd>lua require("user.functions").toggle_option("relativenumber")<cr>', "Relative" },
     l = { '<cmd>lua require("user.functions").toggle_option("cursorline")<cr>', "Cursorline" },
     s = { '<cmd>lua require("user.functions").toggle_option("spell")<cr>', "Spell" },
     t = { '<cmd>lua require("user.functions").toggle_tabline()<cr>', "Tabline" },
+
   },
 
   -- s = {
@@ -217,12 +212,11 @@ local mappings = {
     name = "Find",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-    f = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-      "Find files",
-    },
-    t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+    f = { "<cmd>Telescope find_files<cr>", "Find files" },
+    t = { "<cmd>Telescope live_grep<cr>", "Find Text" },
+    s = { "<cmd>Telescope grep_string<cr>", "Find String" },
     h = { "<cmd>Telescope help_tags<cr>", "Help" },
+    H = { "<cmd>Telescope highlights<cr>", "Highlights" },
     i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
     l = { "<cmd>Telescope resume<cr>", "Last Search" },
     M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
@@ -276,7 +270,8 @@ local mappings = {
     f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
     F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
     i = { "<cmd>LspInfo<cr>", "Info" },
-    h = { "<cmd>IlluminationToggle<cr>", "Toggle Doc HL" },
+    h = { "<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Toggle Hints" },
+    H = { "<cmd>IlluminationToggle<cr>", "Toggle Doc HL" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
       "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
@@ -286,6 +281,7 @@ local mappings = {
       "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>",
       "Prev Diagnostic",
     },
+    v = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Virtual Text" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     o = { "<cmd>SymbolsOutline<cr>", "Outline" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
@@ -347,6 +343,14 @@ local mappings = {
     p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
     r = { "<cmd>TSToggle rainbow<cr>", "Rainbow" },
   },
+
+  -- z = {
+  --   name = "Zen",
+  --   z = { "<cmd>TZAtaraxis<cr>", "Zen" },
+  --   m = { "<cmd>TZMinimalist<cr>", "Minimal" },
+  --   n = { "<cmd>TZNarrow<cr>", "Narrow" },
+  --   f = { "<cmd>TZFocus<cr>", "Focus" },
+  -- },
 }
 
 local vopts = {
@@ -358,8 +362,9 @@ local vopts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 local vmappings = {
-  ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
+  ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>', "Comment" },
   s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
+  -- z = { "<cmd>TZNarrow<cr>", "Narrow" },
 }
 
 which_key.setup(setup)
