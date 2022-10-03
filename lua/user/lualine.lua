@@ -50,8 +50,8 @@ if lualine_scheme == "darkplus_dark" then
   purple = "#B48EAD"
 end
 
-local sl_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
-local sl_hl_sep = vim.api.nvim_get_hl_by_name("StatusLineSeparator", true)
+-- local sl_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+-- local sl_hl_sep = vim.api.nvim_get_hl_by_name("StatusLineSeparator", true)
 
 vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = dark_gray })
 vim.api.nvim_set_hl(0, "SLTermIcon", { fg = purple, bg = gray })
@@ -366,7 +366,7 @@ local lanuage_server = {
       end
     end
 
-    local clients = vim.lsp.buf_get_clients()
+    local clients = vim.lsp.get_active_clients()
     local client_names = {}
     local copilot_active = false
 
