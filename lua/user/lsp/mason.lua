@@ -10,6 +10,7 @@ end
 
 local servers = {
   "cssls",
+  "intelephense",
   "cssmodules_ls",
   "emmet_ls",
   "html",
@@ -114,6 +115,11 @@ for _, server in pairs(servers) do
   if server == "emmet_ls" then
     local emmet_ls_opts = require "user.lsp.settings.emmet_ls"
     opts = vim.tbl_deep_extend("force", emmet_ls_opts, opts)
+  end
+
+  if server == "intelephense" then
+    local intelephense_opts = require "user.lsp.settings.intelephense"
+    opts = vim.tbl_deep_extend("force", intelephense_opts, opts)
   end
 
   if server == "zk" then

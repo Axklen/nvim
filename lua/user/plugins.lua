@@ -143,8 +143,7 @@ return packer.startup(function(use)
   use "lalitmee/browse.nvim"
 
   -- Registers
-  -- deactivated due to an error
-  -- use "tversteeg/registers.nvim"
+  use "tversteeg/registers.nvim"
 
   -- Icon
   use "kyazdani42/nvim-web-devicons"
